@@ -69,9 +69,25 @@ const projects = [
 const navLinks = [
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'About' },
+  { href: '#resume', label: 'Resume' },
   { href: '#projects', label: 'Projects' },
   { href: '#contact', label: 'Contact' },
 ]
+
+const skillGroups = [
+  { label: 'Android', skills: ['Kotlin', 'Jetpack Compose', 'Java', 'XML'] },
+  { label: 'Web', skills: ['React', 'JavaScript', 'HTML', 'CSS', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Node.js'] },
+  { label: 'Interests', skills: ['Mobile experiences', 'Useful web apps', 'Kotlin Multiplatform'] },
+]
+
+const resumeEntries = {
+  education: [
+    { title: 'Information Technology', place: 'Your University', period: 'In progress', detail: 'Add your program, school, and expected graduation date.' },
+  ],
+  experience: [
+    { title: 'Independent Developer', place: 'Personal projects', period: '2023 — Present', detail: 'Building Android and web applications while growing skills in product design and development.' },
+  ],
+}
 
 function Icon({ name, className = '' }) {
   if (name === 'github') return <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.72c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.25 10.25 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z" /></svg>
@@ -79,7 +95,7 @@ function Icon({ name, className = '' }) {
   return <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
 }
 
-function smoothScrollTo(href) {
+function smoothScrollTo(href, onComplete) {
   const target = document.querySelector(href)
   if (!target) return
   const startY = window.scrollY
@@ -91,6 +107,7 @@ function smoothScrollTo(href) {
     const progress = Math.min((now - startTime) / duration, 1)
     window.scrollTo({ top: startY + distance * ease(progress), behavior: 'auto' })
     if (progress < 1) requestAnimationFrame(step)
+    else onComplete?.()
   }
   requestAnimationFrame(step)
 }
@@ -106,11 +123,16 @@ function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       let current = 'home'
+      let currentTop = Number.NEGATIVE_INFINITY
       for (const { href } of navLinks) {
         const section = document.getElementById(href.slice(1))
-        if (section && section.getBoundingClientRect().top <= 128) current = href.slice(1)
+        const top = section?.getBoundingClientRect().top
+        if (top !== undefined && top <= 128 && top > currentTop) {
+          current = href.slice(1)
+          currentTop = top
+        }
       }
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 200) current = 'contact'
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) current = 'contact'
       setActive(`#${current}`)
     }
     onScroll()
@@ -121,7 +143,7 @@ function Navbar() {
   const followLink = (href) => (event) => {
     event.preventDefault()
     setOpen(false)
-    smoothScrollTo(href)
+    smoothScrollTo(href, () => setActive(href))
   }
 
   return <header className="site-header"><nav className="top-nav" aria-label="Main navigation">
@@ -139,6 +161,7 @@ function Hero() {
   return <section id="home" className="hero-section page-width" aria-label="Intro">
     <div className="hero-grid">
       <div className="hero-copy">
+        <p className="eyebrow hero-welcome">Welcome to my portfolio</p>
         <h1><span>John Lery Domingo</span></h1>
         <p className="hero-role">Android Developer · Web Developer</p>
         <p className="hero-description">I combine my knowledge of Android development and web technologies to deliver high-quality and user-friendly mobile and web applications.</p>
@@ -173,7 +196,7 @@ function About() {
     <div className="about-grid"><div className="about-copy">
       <p>I&apos;m an IT student and a passionate developer who&apos;s spent most time with Android development, building apps with <Tech name="Java" />, <Tech name="XML" />, <Tech name="Kotlin" /> and <Tech name="Jetpack Compose" />. I also have experience with web development using <Tech name="HTML" />, <Tech name="CSS" />, <Tech name="JavaScript" />, <Tech name="React" />, <Tech name="Next.js" />, <Tech name="TypeScript" />, <Tech name="Tailwind CSS" /> and <Tech name="Node.js" />.</p>
       <p>Currently, I&apos;m focused on building my portfolio, working on personal projects and exploring other technologies like <Tech name="Kotlin Multiplatform" />. I&apos;m always open to learning and collaborating on exciting projects.</p>
-    </div><dl className="about-facts"><div><dt>Focus</dt><dd>Android · Web</dd></div><div><dt>Currently</dt><dd>Building my portfolio, open to opportunities</dd></div></dl></div>
+    </div><dl className="about-facts"><div><dt>Focus</dt><dd>Android · Web</dd></div><div><dt>Currently</dt><dd>Building my portfolio, open to opportunities</dd></div><div><dt>Interests</dt><dd>Mobile experiences · Useful web apps · Learning new tools</dd></div></dl></div>
   </section>
 }
 
@@ -192,6 +215,37 @@ function Projects() {
     <p className="eyebrow">Projects</p><h2>Selected work</h2><p className="section-intro">A selection of things I&apos;ve built across Android and the web.</p>
     <div className="filters" role="group" aria-label="Filter projects by platform">{[['all', 'All'], ['android', 'Android'], ['web', 'Web']].map(([value, label]) => <button type="button" key={value} aria-pressed={active === value} className={active === value ? 'selected' : ''} onClick={() => setActive(value)}>{label}</button>)}</div>
     {visible.length ? <ul className="project-grid">{visible.map((project) => <ProjectCard key={project.slug} project={project} />)}</ul> : <p className="empty-projects">No projects here yet.</p>}
+  </section>
+}
+
+function ResumeEntry({ entry }) {
+  return <li className="resume-entry">
+    <div className="resume-entry-heading"><h4>{entry.title}</h4><span>{entry.period}</span></div>
+    <p className="resume-place">{entry.place}</p>
+    <p>{entry.detail}</p>
+  </li>
+}
+
+function Resume() {
+  return <section id="resume" aria-label="Resume and skills" className="content-section resume-section">
+    <p className="eyebrow">Resume</p><h2>Education, experience &amp; skills</h2>
+    <p className="section-intro">A quick overview of my background. The education entry is sample content—replace it with your details.</p>
+    <div className="resume-grid">
+      <div className="resume-column">
+        <h3>Education</h3>
+        <ul className="resume-list">{resumeEntries.education.map((entry) => <ResumeEntry key={entry.title} entry={entry} />)}</ul>
+        <h3 className="resume-subheading">Experience</h3>
+        <ul className="resume-list">{resumeEntries.experience.map((entry) => <ResumeEntry key={entry.title} entry={entry} />)}</ul>
+      </div>
+      <div className="resume-column skills-column">
+        <h3>Skills &amp; interests</h3>
+        {skillGroups.map((group) => <div className="skill-group" key={group.label}>
+          <h4>{group.label}</h4>
+          <ul className="skill-tags">{group.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
+        </div>)}
+        <a className="button button-outline resume-download" href="/resume.pdf" download>Download resume</a>
+      </div>
+    </div>
   </section>
 }
 
@@ -241,5 +295,5 @@ export default function App() {
     document.title = project ? `${project.title} — Johnlery` : 'Johnlery — Portfolio'
   }, [project])
 
-  return <><Navbar /><main>{project ? <ProjectPage project={project} /> : <><Hero /><div className="page-width"><About /><Projects /></div></>}</main><Footer /></>
+  return <><Navbar /><main>{project ? <ProjectPage project={project} /> : <><Hero /><div className="page-width"><About /><Resume /><Projects /></div></>}</main><Footer /></>
 }

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import './App.css'
 
 const socials = [
   { label: 'GitHub', href: 'https://github.com/DevDomingoJohn', icon: 'github' },
@@ -82,10 +81,32 @@ const skillGroups = [
 
 const resumeEntries = {
   education: [
-    { title: 'Information Technology', place: 'Your University', period: 'In progress', detail: 'Add your program, school, and expected graduation date.' },
+    {
+      title: 'Bachelor of Science in Information Technology',
+      place: 'Cavite State University – Tanza',
+      period: '2023 – 2028 (Expected)',
+      detail: 'Third-year student focused on software development, AI, and web technologies. Coursework in data structures, algorithms, databases, networking and application development.',
+    },
   ],
   experience: [
-    { title: 'Independent Developer', place: 'Personal projects', period: '2023 — Present', detail: 'Building Android and web applications while growing skills in product design and development.' },
+    {
+      title: 'Independent Developer',
+      place: 'Personal Projects',
+      period: '2023 - Present',
+      detail: 'Designing and shipping Android, Web and AI applications end-to-end, from prototyping to deployment, with a focus on product design and user experience.',
+    },
+    {
+      title: 'Open Source Contributor',
+      place: 'Vencord',
+      period: '2025 - Present',
+      detail: 'Built an AI style translation plugin using LLMs to translate text into user-chosen styles and different languages. Contributed TypeScript/React fixes and features via pull requests and code review.',
+    },
+    {
+      title: 'Creator & Developer',
+      place: 'Pleiadex Project / Hub',
+      period: '2025 - Present',
+      detail: 'Built and maintained a scripting platform serving nearly 1,000 users, including account systems, script distribution, versioning, and community moderation.',
+    },
   ],
 }
 
@@ -153,7 +174,7 @@ function Navbar() {
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d={open ? 'M6 6l12 12M18 6 6 18' : 'M4 6h16M4 12h16M4 18h16'} /></svg>
     </button>
   </nav>
-  {open && <div className="mobile-menu" id="mobile-menu"><ul>{navLinks.map((link) => <li key={link.href}><a href={link.href} onClick={followLink(link.href)}>{link.label}</a></li>)}</ul></div>}
+    {open && <div className="mobile-menu" id="mobile-menu"><ul>{navLinks.map((link) => <li key={link.href}><a href={link.href} onClick={followLink(link.href)}>{link.label}</a></li>)}</ul></div>}
   </header>
 }
 
@@ -161,7 +182,6 @@ function Hero() {
   return <section id="home" className="hero-section page-width" aria-label="Intro">
     <div className="hero-grid">
       <div className="hero-copy">
-        <p className="eyebrow hero-welcome">Welcome to my portfolio</p>
         <h1><span>John Lery Domingo</span></h1>
         <p className="hero-role">Android Developer · Web Developer</p>
         <p className="hero-description">I combine my knowledge of Android development and web technologies to deliver high-quality and user-friendly mobile and web applications.</p>
@@ -186,6 +206,8 @@ function Tech({ name }) {
     HTML: 'orange', CSS: 'sky', JavaScript: 'yellow', React: 'cyan',
     'Next.js': 'white', TypeScript: 'blue', 'Tailwind CSS': 'cyan',
     'Node.js': 'green', 'Kotlin Multiplatform': 'purple',
+    Android: 'purple', Web: 'sky', 'Mobile experiences': 'cyan',
+    'Useful web apps': 'blue', 'Learning new tools': 'green',
   }
   return <code className={`tech-tag ${colors[name] || 'sky'}`}>{name}</code>
 }
@@ -241,7 +263,7 @@ function Resume() {
         <h3>Skills &amp; interests</h3>
         {skillGroups.map((group) => <div className="skill-group" key={group.label}>
           <h4>{group.label}</h4>
-          <ul className="skill-tags">{group.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
+          <ul className="skill-tags">{group.skills.map((skill) => <li key={skill}><Tech name={skill} /></li>)}</ul>
         </div>)}
         <a className="button button-outline resume-download" href="/resume.pdf" download>Download resume</a>
       </div>

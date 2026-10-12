@@ -1,4 +1,8 @@
 import { useEffect, useState } from 'react'
+import draftyScreenshot from './assets/drafty_screenshot.jpg'
+import draftyLandingScreenshot from './assets/drafty_landing_screenshot.png'
+import kixoScreenshot from './assets/KIXO_screenshot.png'
+import readykitScreenshot from './assets/readykit_screenshot.png'
 
 const socials = [
   { label: 'GitHub', href: 'https://github.com/DevDomingoJohn', icon: 'github' },
@@ -8,60 +12,42 @@ const socials = [
 
 const projects = [
   {
-    slug: 'example-android-app',
-    title: 'Example Android App',
+    title: 'Drafty',
     category: 'android',
-    description: 'A short description of what this Android app does and why it matters.',
-    overview: 'A deeper write-up of the project for the case study page: the problem, the approach, and the result.',
-    problem: 'Describe the problem this app exists to solve, who it is for, and why existing solutions fell short.',
-    approach: ['How you broke the problem down', 'Key design decisions and the architecture you chose', 'What you tried and learned along the way'],
-    outcome: ['Result 1 — a metric, user response, or outcome', "Result 2 — what you'd do differently next time"],
-    highlights: ['What problem it solves', 'A notable design or architecture decision', 'Result or metric worth showing'],
+    image: draftyScreenshot,
+    source: 'closed',
+    description: 'An overlay for ranked ML drafts that recommends hero picks by weighing pick, win, and ban rates alongside team synergy and counter matchups, helping players make more informed choices during the draft.',
+    year: 2026,
+    techStack: ['Kotlin', 'Jetpack Compose', 'OkHttp', 'Media Projection API'],
+  },
+  {
+    title: 'KIXO',
+    category: 'web',
+    image: kixoScreenshot,
+    source: 'open',
+    repository: 'https://github.com/DevDomingoJohn/KIXO',
+    description: 'A shoe-shopping website inspired by online marketplaces like Lazada, where customers can explore shoe listings and shop for styles in one place.',
+    year: 2026,
+    techStack: ['HTML', 'CSS', 'JavaScript'],
+  },
+  {
+    title: 'ReadyKit',
+    category: 'android',
+    image: readykitScreenshot,
+    source: 'open',
+    repository: 'https://github.com/DevDomingoJohn/ReadyKit',
+    description: 'An offline emergency-preparedness app for organizing goods, medication, and other essential supplies. Track quantities and expiry dates, check what is ready when it matters, and keep important emergency numbers close at hand.',
     year: 2025,
-    techStack: ['Kotlin', 'Jetpack Compose'],
-    links: { github: 'https://github.com/DevDomingoJohn/example-android-app' },
+    techStack: ['Kotlin', 'Jetpack Compose', 'Room'],
   },
   {
-    slug: 'example-web-app',
-    title: 'Example Web App',
+    title: 'Drafty Landing Page',
     category: 'web',
-    description: 'A short description of what this web project does and why it matters.',
-    overview: 'A deeper write-up of the project for the case study page: the problem, the approach, and the result.',
-    problem: 'Describe the problem this project set out to solve, who it is for, and why existing solutions fell short.',
-    approach: ['How you broke the problem down', 'Key design decisions and the tech choices you made', 'What you tried and learned along the way'],
-    outcome: ['Result 1 — a metric, user response, or outcome', "Result 2 — what you'd do differently next time"],
-    highlights: ['What problem it solves', 'A notable design or architecture decision', 'Result or metric worth showing'],
-    year: 2024,
-    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-    links: { live: 'https://example-web-app.vercel.app', github: 'https://github.com/DevDomingoJohn/example-web-app' },
-  },
-  {
-    slug: 'example-android-utility',
-    title: 'Example Android Utility',
-    category: 'android',
-    description: 'A compact utility Android app solving a specific daily problem.',
-    overview: 'A deeper write-up of the project for the case study page: the problem, the approach, and the result.',
-    problem: 'Describe the specific daily problem this utility app solves and who it helps.',
-    approach: ['How you broke the problem down', 'Key design decisions and the architecture you chose', 'What you tried and learned along the way'],
-    outcome: ['Result 1 — a metric, user response, or outcome', "Result 2 — what you'd do differently next time"],
-    highlights: ['What problem it solves', 'A notable design or architecture decision', 'Result or metric worth showing'],
-    year: 2023,
-    techStack: ['Kotlin', 'Room', 'Material 3'],
-    links: { github: 'https://github.com/DevDomingoJohn/example-android-utility' },
-  },
-  {
-    slug: 'example-landing-page',
-    title: 'Example Landing Page',
-    category: 'web',
-    description: 'A marketing landing page built for speed and conversion.',
-    overview: 'A deeper write-up of the project for the case study page: the problem, the approach, and the result.',
-    problem: 'Describe the goal this landing page had to hit and the problem with the previous version.',
-    approach: ['How you structured the page and the copy', 'Key design decisions and performance choices', 'What you tested and learned along the way'],
-    outcome: ['Result 1 — conversion or performance outcome', "Result 2 — what you'd do differently next time"],
-    highlights: ['What problem it solves', 'A notable design or architecture decision', 'Result or metric worth showing'],
-    year: 2023,
-    techStack: ['React', 'Tailwind CSS'],
-    links: { live: 'https://example-landing-page.vercel.app' },
+    image: draftyLandingScreenshot,
+    source: 'closed',
+    description: 'The companion website for Drafty, introducing the app, explaining how to use it, and providing a place to download the latest version.',
+    year: 2026,
+    techStack: ['HTML', 'CSS', 'JavaScript'],
   },
 ]
 
@@ -76,7 +62,8 @@ const navLinks = [
 const skillGroups = [
   { label: 'Android', skills: ['Kotlin', 'Jetpack Compose', 'Java', 'XML'] },
   { label: 'Web', skills: ['React', 'JavaScript', 'HTML', 'CSS', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Node.js'] },
-  { label: 'Interests', skills: ['Mobile experiences', 'Useful web apps', 'Kotlin Multiplatform'] },
+  { label: 'Scripting', skills: ['Lua', 'Python'] },
+  { label: 'Interests', skills: ['AI Development', 'Kotlin Multiplatform', 'Game Development', 'Networking', 'Software Development'] },
 ]
 
 const resumeEntries = {
@@ -206,6 +193,8 @@ function Tech({ name }) {
     HTML: 'orange', CSS: 'sky', JavaScript: 'yellow', React: 'cyan',
     'Next.js': 'white', TypeScript: 'blue', 'Tailwind CSS': 'cyan',
     'Node.js': 'green', 'Kotlin Multiplatform': 'purple',
+    'AI Development': 'cyan', 'Game Development': 'green',
+    Networking: 'blue', 'Software Development': 'amber',
     Android: 'purple', Web: 'sky', 'Mobile experiences': 'cyan',
     'Useful web apps': 'blue', 'Learning new tools': 'green',
   }
@@ -218,16 +207,17 @@ function About() {
     <div className="about-grid"><div className="about-copy">
       <p>I&apos;m an IT student and a passionate developer who&apos;s spent most time with Android development, building apps with <Tech name="Java" />, <Tech name="XML" />, <Tech name="Kotlin" /> and <Tech name="Jetpack Compose" />. I also have experience with web development using <Tech name="HTML" />, <Tech name="CSS" />, <Tech name="JavaScript" />, <Tech name="React" />, <Tech name="Next.js" />, <Tech name="TypeScript" />, <Tech name="Tailwind CSS" /> and <Tech name="Node.js" />.</p>
       <p>Currently, I&apos;m focused on building my portfolio, working on personal projects and exploring other technologies like <Tech name="Kotlin Multiplatform" />. I&apos;m always open to learning and collaborating on exciting projects.</p>
-    </div><dl className="about-facts"><div><dt>Focus</dt><dd>Android · Web</dd></div><div><dt>Currently</dt><dd>Building my portfolio, open to opportunities</dd></div><div><dt>Interests</dt><dd>Mobile experiences · Useful web apps · Learning new tools</dd></div></dl></div>
+    </div><dl className="about-facts"><div><dt>Focus</dt><dd>Android · Web · Scripting</dd></div><div><dt>Currently</dt><dd>Locked in on my personal projects, and still open to opportunities</dd></div><div><dt>Interests</dt><dd>Mobile experiences · AI Development · Learning new tools · Software Development</dd></div></dl></div>
   </section>
 }
 
 function ProjectCard({ project }) {
   const [imageFailed, setImageFailed] = useState(false)
-  return <li className="project-card"><a href={`/projects/${project.slug}`} onClick={(event) => { event.preventDefault(); navigateTo(`/projects/${project.slug}`) }}>
-    <div className="project-cover">{!imageFailed ? <img src={`/images/${project.slug}.png`} alt={`${project.title} screenshot`} onError={() => setImageFailed(true)} /> : <span aria-hidden="true">{project.category === 'android' ? '🤖' : '🌐'}</span>}</div>
-    <div className="project-info"><div className="project-meta"><span className="category-pill">{project.category === 'android' ? 'Android' : 'Web'}</span><span>{project.year}</span></div><h3>{project.title}</h3><p>{project.description}</p><ul className="tech-list">{project.techStack.slice(0, 4).map((tech) => <li key={tech}>{tech}</li>)}</ul></div>
-  </a></li>
+  const Card = project.repository ? 'a' : 'article'
+  return <li className="project-card"><Card className="project-card-content" {...(project.repository ? { href: project.repository, target: '_blank', rel: 'noopener noreferrer', 'aria-label': `View ${project.title} repository on GitHub` } : {})}>
+    <div className={`project-cover${project.image ? ' project-cover-screenshot' : ''}`}>{project.image && !imageFailed ? <img src={project.image} alt={`${project.title} screenshot`} onError={() => setImageFailed(true)} /> : <span aria-hidden="true">{project.category === 'android' ? '🤖' : '🌐'}</span>}</div>
+    <div className="project-info"><div className="project-meta"><div className="project-tags"><span className="category-pill">{project.category === 'android' ? 'Android' : 'Web'}</span><span className={`source-pill ${project.source}`}>{project.source === 'open' ? 'Open source' : 'Close source'}</span></div><span>{project.year}</span></div><h3>{project.title}</h3><p>{project.description}</p><ul className="tech-list">{project.techStack.slice(0, 4).map((tech) => <li key={tech}>{tech}</li>)}</ul></div>
+  </Card></li>
 }
 
 function Projects() {
@@ -251,7 +241,7 @@ function ResumeEntry({ entry }) {
 function Resume() {
   return <section id="resume" aria-label="Resume and skills" className="content-section resume-section">
     <p className="eyebrow">Resume</p><h2>Education, experience &amp; skills</h2>
-    <p className="section-intro">A quick overview of my background. The education entry is sample content—replace it with your details.</p>
+    <p className="section-intro">A quick overview of my background.</p>
     <div className="resume-grid">
       <div className="resume-column">
         <h3>Education</h3>
@@ -278,44 +268,10 @@ function Footer() {
   </div></footer>
 }
 
-function CaseStudySection({ heading, body, bullets }) {
-  return <section><h2>{heading}</h2>{body && <p>{body}</p>}{bullets && <ul>{bullets.map((item) => <li key={item}>{item}</li>)}</ul>}</section>
-}
-
-function ProjectPage({ project }) {
-  const index = projects.indexOf(project)
-  const previous = projects[index - 1]
-  const next = projects[index + 1]
-  const linkButtons = [['live', 'Live site ↗'], ['playStore', 'Play Store ↗'], ['github', 'Source ↗'], ['demo', 'Demo ↗']]
-  return <article className="case-study page-width">
-    <a className="all-projects" href="/#projects" onClick={(event) => { event.preventDefault(); navigateTo('/'); window.setTimeout(() => smoothScrollTo('#projects'), 50) }}>← All projects</a>
-    <header className="case-header"><div className="project-meta"><span className="category-pill">{project.category === 'android' ? 'Android' : 'Web'}</span><span>{project.year}</span></div><h1>{project.title}</h1><p>{project.overview}</p><div className="case-links">{linkButtons.filter(([key]) => project.links[key]).map(([key, label]) => <a key={key} href={project.links[key]} target="_blank" rel="noopener noreferrer">{label}</a>)}</div></header>
-    <div className="case-cover"><span aria-hidden="true">{project.category === 'android' ? '🤖' : '🌐'}</span></div>
-    <div className="case-sections"><CaseStudySection heading="The problem" body={project.problem} /><CaseStudySection heading="The approach" bullets={project.approach} /><CaseStudySection heading="Highlights" bullets={project.highlights} /><CaseStudySection heading="The outcome" bullets={project.outcome} /></div>
-    <section className="case-stack"><h2>Tech stack</h2><ul>{project.techStack.map((tech) => <li key={tech}>{tech}</li>)}</ul></section>
-    <nav className="project-pagination" aria-label="More projects">{previous ? <a href={`/projects/${previous.slug}`} onClick={(event) => { event.preventDefault(); navigateTo(`/projects/${previous.slug}`) }}><span>Previous</span>{previous.title}</a> : <span />}{next && <a href={`/projects/${next.slug}`} onClick={(event) => { event.preventDefault(); navigateTo(`/projects/${next.slug}`) }}><span>Next</span>{next.title}</a>}</nav>
-  </article>
-}
-
-function navigateTo(path) {
-  window.history.pushState({}, '', path)
-  window.dispatchEvent(new PopStateEvent('popstate'))
-  window.scrollTo({ top: 0, behavior: 'auto' })
-}
-
 export default function App() {
-  const [path, setPath] = useState(window.location.pathname)
   useEffect(() => {
-    const handlePopState = () => setPath(window.location.pathname)
-    window.addEventListener('popstate', handlePopState)
-    return () => window.removeEventListener('popstate', handlePopState)
+    document.title = 'Johnlery — Portfolio'
   }, [])
-  const slug = path.match(/^\/projects\/([^/]+)\/?$/)?.[1]
-  const project = projects.find((item) => item.slug === slug)
 
-  useEffect(() => {
-    document.title = project ? `${project.title} — Johnlery` : 'Johnlery — Portfolio'
-  }, [project])
-
-  return <><Navbar /><main>{project ? <ProjectPage project={project} /> : <><Hero /><div className="page-width"><About /><Resume /><Projects /></div></>}</main><Footer /></>
+  return <><Navbar /><main><Hero /><div className="page-width"><About /><Resume /><Projects /></div></main><Footer /></>
 }

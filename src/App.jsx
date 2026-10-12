@@ -3,6 +3,7 @@ import draftyScreenshot from './assets/drafty_screenshot.jpg'
 import draftyLandingScreenshot from './assets/drafty_landing_screenshot.png'
 import kixoScreenshot from './assets/KIXO_screenshot.png'
 import readykitScreenshot from './assets/readykit_screenshot.png'
+import resumePdf from './assets/Resume.pdf'
 
 const socials = [
   { label: 'GitHub', href: 'https://github.com/DevDomingoJohn', icon: 'github' },
@@ -173,7 +174,7 @@ function Hero() {
         <p className="hero-role">Android Developer · Web Developer</p>
         <p className="hero-description">I combine my knowledge of Android development and web technologies to deliver high-quality and user-friendly mobile and web applications.</p>
         <p className="hero-description hero-invite">Interested in collaborating on projects or have an idea in mind? Let&apos;s talk.</p>
-        <div className="hero-actions"><a className="button button-primary" href="#projects" onClick={(event) => { event.preventDefault(); smoothScrollTo('#projects') }}>View my work</a><a className="button button-outline" href="/resume.pdf" download>Download resume</a></div>
+        <div className="hero-actions"><a className="button button-primary" href="#projects" onClick={(event) => { event.preventDefault(); smoothScrollTo('#projects') }}>View my work</a><a className="button button-outline" href={resumePdf} download>Download resume</a></div>
         <SocialLinks />
       </div>
       <div className="code-window-wrap" aria-hidden="true">
@@ -255,7 +256,7 @@ function Resume() {
           <h4>{group.label}</h4>
           <ul className="skill-tags">{group.skills.map((skill) => <li key={skill}><Tech name={skill} /></li>)}</ul>
         </div>)}
-        <a className="button button-outline resume-download" href="/resume.pdf" download>Download resume</a>
+        <a className="button button-outline resume-download" href={resumePdf} download>Download resume</a>
       </div>
     </div>
   </section>
